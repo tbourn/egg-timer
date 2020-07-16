@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int MAX_TIME = 86400; // seconds
-    private static final int STARTING_POSITION = 30;
+    private static final int MAX_TIME = 600; // seconds
+    private static final int STARTING_POSITION = MAX_TIME / 2;
 
     private Button goButton;
     private CountDownTimer countDownTimer;
