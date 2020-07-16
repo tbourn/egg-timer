@@ -27,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        seekBar = findViewById(R.id.seekBar);
-        timeTextView = findViewById(R.id.timeTextView);
         goButton = findViewById(R.id.button);
 
+        timeTextView = findViewById(R.id.timeTextView);
+        timeTextView.setText(getTimerAsString(STARTING_POSITION));
+
+        seekBar = findViewById(R.id.seekBar);
         seekBar.setMax(MAX_TIME);
         seekBar.setProgress(STARTING_POSITION);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             goButton.setText(R.string.StopText);
 
-            /**
+            /*
              * Takes the number of seconds the user wants to set and multiply by 1000,
              * so then we can work with milliseconds.
              * Adds 100 (a tenth of a second) to get correct result. The problem is that by the time the
@@ -95,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
     private void resetTimer() {
         // Set font color back to green variation
         timeTextView.setTextColor(getResources().getColor(R.color.timerGreenColor));
-        timeTextView.setText(R.string.initialTimerValue);
-        seekBar.setProgress(30);
+        timeTextView.setText(getTimerAsString(STARTING_POSITION));
+        seekBar.setProgress(STARTING_POSITION);
         seekBar.setEnabled(true);
         countDownTimer.cancel();
         goButton.setText(R.string.goButtonText);
@@ -109,20 +111,28 @@ public class MainActivity extends AppCompatActivity {
      * @param secondsLeft
      */
     private void updateTimer(int secondsLeft) {
+        String timeAsString=getTimerAsString(secondsLeft);
+        timeTextView.setText(timeAsString);
+    }
+
+    /**
+     * Returns seconds as String representation in form of HH:MM:SS
+     * @param secondsLeft
+     * @return
+     */
+    private String getTimerAsString(int secondsLeft) {
         int hours = secondsLeft / 3600;
         int minutes = (secondsLeft % 3600) / 60;
         int seconds = secondsLeft % 60;
 
-        String hoursString = getTimeAsString(hours);
-        String minutesString = getTimeAsString(minutes);
-        String secondString = getTimeAsString(seconds);
+        String hoursString = getPrefixedTime(hours);
+        String minutesString = getPrefixedTime(minutes);
+        String secondString = getPrefixedTime(seconds);
         String displayText = minutesString + ":" + secondString;
 
         if (hours != 0) {
             displayText = hoursString + ":" + displayText;
         }
-
-        timeTextView.setText(displayText);
 
         // Change font color when timer is less than 6
         if (hours == 0 && minutes == 0 && seconds < 6) {
@@ -130,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             timeTextView.setTextColor(getResources().getColor(R.color.timerGreenColor));
         }
+        return displayText;
     }
 
     /**
@@ -139,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
      * @param time
      * @return
      */
-    private String getTimeAsString(int time) {
+    private String getPrefixedTime(int time) {
         String timeString = Integer.toString(time);
         if (timeString.length() == 1) {
             timeString = 0 + timeString;
