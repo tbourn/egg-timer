@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int MAX_TIME = 800; // seconds
+    private static final int MAX_TIME = 86400; // seconds
     private static final int STARTING_POSITION = 30;
 
     private Button goButton;
@@ -110,14 +110,19 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateTimer(int secondsLeft) {
         int hours = secondsLeft / 3600;
-        int minutes = (secondsLeft % 3060) / 60;
+        int minutes = (secondsLeft % 3600) / 60;
         int seconds = secondsLeft % 60;
 
         String hoursString = getTimeAsString(hours);
         String minutesString = getTimeAsString(minutes);
         String secondString = getTimeAsString(seconds);
+        String displayText = minutesString + ":" + secondString;
 
-        timeTextView.setText(hoursString + ":" + minutesString + ":" + secondString);
+        if (hours != 0) {
+            displayText = hoursString + ":" + displayText;
+        }
+
+        timeTextView.setText(displayText);
 
         // Change font color when timer is less than 6
         if (hours == 0 && minutes == 0 && seconds < 6) {
