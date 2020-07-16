@@ -1,5 +1,6 @@
 package com.thomas.appeggtimer;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -113,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
         String secondString = getTimeAsString(seconds);
 
         timeTextView.setText(minutesString + ":" + secondString);
+
+        // Change font color when timer is less than 6
+        if (minutes == 0 && seconds < 6) {
+            timeTextView.setTextColor(Color.RED);
+        }
     }
 
     /**
