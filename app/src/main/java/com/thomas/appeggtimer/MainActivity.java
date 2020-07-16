@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             // The User can't update the seekBar
             seekBar.setEnabled(false);
 
-            goButton.setText("Stop");
+            goButton.setText(R.string.StopText);
 
             /**
              * Takes the number of seconds the user wants to set and multiply by 1000,
@@ -93,11 +93,13 @@ public class MainActivity extends AppCompatActivity {
      * Resets the timer
      */
     private void resetTimer() {
-        timeTextView.setText("00:30");
+        // Set font color back to green variation
+        timeTextView.setTextColor(getResources().getColor(R.color.timerGreenColor));
+        timeTextView.setText(R.string.initialTimerValue);
         seekBar.setProgress(30);
         seekBar.setEnabled(true);
         countDownTimer.cancel();
-        goButton.setText("Go!");
+        goButton.setText(R.string.goButtonText);
         counterIsActive = false;
     }
 
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
      * @param secondsLeft
      */
     private void updateTimer(int secondsLeft) {
+        int hours = secondsLeft / 3600;
         int minutes = secondsLeft / 60;
         int seconds = secondsLeft - minutes * 60;
 

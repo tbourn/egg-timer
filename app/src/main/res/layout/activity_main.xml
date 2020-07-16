@@ -26,14 +26,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/egg" />
+        app:srcCompat="@drawable/egg"
+        android:contentDescription="@string/imageDescription" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="buttonClicked"
-        android:text="Go!"
+        android:text="@string/goButtonText"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -46,8 +47,8 @@
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:30"
-        android:textColor="#4CAF50"
+        android:text="@string/initialTimerValue"
+        android:textColor="@color/timerGreenColor"
         android:textSize="64sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
