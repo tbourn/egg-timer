@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
             // The User can't update the seekBar
             seekBar.setEnabled(false);
+            seekBar.setVisibility(View.INVISIBLE);
 
             goButton.setText(R.string.StopText);
 
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.air_horn);
                     mediaPlayer.start();
                     resetTimer();
+                    seekBar.setVisibility(View.VISIBLE);
                 }
             }.start();
         }
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         timeTextView.setText(getTimerAsString(STARTING_POSITION));
         seekBar.setProgress(STARTING_POSITION);
         seekBar.setEnabled(true);
+        seekBar.setVisibility(View.VISIBLE);
         countDownTimer.cancel();
         goButton.setText(R.string.goButtonText);
         counterIsActive = false;
@@ -111,12 +114,13 @@ public class MainActivity extends AppCompatActivity {
      * @param secondsLeft
      */
     private void updateTimer(int secondsLeft) {
-        String timeAsString=getTimerAsString(secondsLeft);
+        String timeAsString = getTimerAsString(secondsLeft);
         timeTextView.setText(timeAsString);
     }
 
     /**
      * Returns seconds as String representation in form of HH:MM:SS
+     *
      * @param secondsLeft
      * @return
      */
