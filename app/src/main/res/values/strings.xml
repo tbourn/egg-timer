@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">App Egg Timer</string>
+    <string name="app_name">Egg Timer</string>
     <string name="goButtonText">Go!</string>
     <string name="imageDescription">Egg</string>\
     <string name="StopText">Stop</string>
